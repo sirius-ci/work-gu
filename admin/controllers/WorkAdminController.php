@@ -36,6 +36,18 @@ class WorkAdminController extends AdminController
         $this->render('insert');
     }
 
+    public function validationAfter($action, $record = null)
+    {
+        if ($action === 'insert') {
+            $this->image->required();
+        } else {
+            $this->image->setDefaultImage($record->image);
+        }
+
+        $this->image->setMinSizes(240, 180)->addProcess('work', ['thumbnail' => [240, 180]]);
+        $this->modelData['image'] = $this->image->save();
+    }
+
     public function update()
     {
         parent::update();

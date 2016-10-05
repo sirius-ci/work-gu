@@ -50,7 +50,7 @@ class Work extends AdminModel
             'site' => $this->input->post('site'),
             'link' => $this->input->post('link'),
             'detail' => $this->input->post('detail'),
-            'image' => $data['image']['name'],
+            'image' => $data['image']->name,
             'order' => $this->makeLastOrder(),
             'language' => $this->language
         ));
@@ -66,7 +66,7 @@ class Work extends AdminModel
 
 
 
-    public function userUpdate($record, $data = array())
+    public function update($record, $data = array())
     {
         $this->db
             ->where('id', $record->id)
@@ -75,7 +75,7 @@ class Work extends AdminModel
                 'site' => $this->input->post('site'),
                 'link' => $this->input->post('link'),
                 'detail' => $this->input->post('detail'),
-                'image' => $data['image']['name'],
+                'image' => $data['image']->name,
             ));
 
         if ($this->db->affected_rows() > 0) {

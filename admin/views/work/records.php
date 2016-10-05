@@ -32,20 +32,28 @@
         </thead>
         <tbody class="sortable">
         <?php foreach ($records as $item): ?>
-        <tr data-id="<?php echo $item->id ?>">
-            <td class="text-center"><input type="checkbox" class="checkall-item" value="<?php echo $item->id ?>" /></td>
-            <td><?php echo $item->id ?></td>
-            <td><?php echo $item->title ?></td>
-            <td><?php echo $item->site ?></td>
-            <td class="text-right">
-                <?php if ($this->permission('update')): ?>
-                    <a class="btn btn-xs btn-primary" href="<?php echo moduleUri('update', $item->id)?>"><i class="fa fa-edit"></i></a>
-                <?php endif; ?>
-                <?php if ($this->permission('delete')): ?>
-                    <a class="btn btn-xs btn-danger confirm-delete" href="<?php echo moduleUri('delete', $item->id) ?>"><i class="fa fa-trash-o"></i></a>
-                <?php endif; ?>
-            </td>
-        </tr>
+            <tr data-id="<?php echo $item->id ?>">
+                <td class="text-center"><input type="checkbox" class="checkall-item" value="<?php echo $item->id ?>" /></td>
+                <td><?php echo $item->id ?></td>
+                <td><?php echo $item->title ?></td>
+                <td><?php echo $item->site ?></td>
+                <td class="text-center">
+                    <div class="btn-group">
+                        <a class="btn btn-xs btn-info disabled"><?php echo $item->order ?></a>
+                        <?php if (! $this->input->get() || $this->input->get('page')): ?>
+                            <a class="btn btn-xs btn-default sortable-handle"><i class="fa fa-arrows"></i></a>
+                        <?php endif; ?>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <?php if ($this->permission('update')): ?>
+                        <a class="btn btn-xs btn-primary" href="<?php echo moduleUri('update', $item->id)?>"><i class="fa fa-edit"></i></a>
+                    <?php endif; ?>
+                    <?php if ($this->permission('delete')): ?>
+                        <a class="btn btn-xs btn-danger confirm-delete" href="<?php echo moduleUri('delete', $item->id) ?>"><i class="fa fa-trash-o"></i></a>
+                    <?php endif; ?>
+                </td>
+            </tr>
         <?php endforeach; ?>
         </tbody>
     </table>
